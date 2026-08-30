@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { BrainCircuit, CodeXml, Palette, Zap } from "lucide-react";
-import { SiAngular, SiBlender, SiCss, SiDart, SiFlutter, SiFigma, SiGit, SiGithub, SiHtml5, SiJavascript, SiJupyter, SiMqtt, SiNumpy, SiPandas, SiPython, SiReact, SiScikitlearn, SiSql, SiTailwindcss, SiTensorflow, SiTypescript } from "react-icons/si";
+import { BrainCircuit, CodeXml, Database, Palette, Zap } from "lucide-react";
+import { SiAngular, SiBlender, SiCss, SiDart, SiFlutter, SiFigma, SiGit, SiGithub, SiHtml5, SiJavascript, SiJupyter, SiMqtt, SiNumpy, SiPandas, SiPython, SiReact, SiScikitlearn, SiTailwindcss, SiTensorflow, SiTypescript } from "react-icons/si";
 import { PageLayout } from "@/components/page-layout";
 import skillsPose from "@/assets/hiba-skills-pose.png";
 
@@ -30,7 +30,7 @@ const groups = [
       { name: "Dart", logo: SiDart },
       { name: "MQTT", logo: SiMqtt },
       { name: "Python", logo: SiPython }, 
-      { name: "SQL", logo: SiSql },
+      { name: "SQL", logo: Database },
     ] 
   },
   { 

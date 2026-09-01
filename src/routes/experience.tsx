@@ -29,6 +29,7 @@ const steps = [
   {
     year: "2023-2024",
     title: "Formation & premiers stages",
+    company: "Higher Institute of Technological Studies of Sidi Bouzid & Tunisie Telecom",
     text: "Debuts a la Higher Institute of Technological Studies of Sidi Bouzid. Stage d'initiation a Tunisie Telecom (telecom infrastructure). Decouverte des fondamentaux du developpement.",
     attestationUrl: "",
     icon: CodeXml,
@@ -36,6 +37,7 @@ const steps = [
   {
     year: "2025-2026",
     title: "Projet de fin d'etudes - IoT & IA",
+    company: "Smart Ways Innovation",
     text: "Stage PFE a Smart Ways Innovation. Developpement d'un systeme intelligent d'irrigation basé sur LoRaWAN, prediction meteorologique et IA. Competences: Angular, Flutter, IoT, machine learning.",
     attestationUrl: "",
     icon: BrainCircuit,
@@ -43,6 +45,7 @@ const steps = [
   {
     year: "Juillet 2026 - Auj.",
     title: "Stage de perfectionnement professionnel",
+    company: "ATS Informatique Sidi Bouzid",
     text: "ATS Informatique Sidi Bouzid. Consolidation des competences en developpement et apprentissage des procedures professionnelles. Travail sur des projets reels.",
     attestationUrl: "",
     icon: BriefcaseBusiness,
@@ -91,7 +94,6 @@ function Experience() {
             <div className="absolute inset-x-10 bottom-4 h-24 rounded-full bg-forest-soft blur-2xl" />
             <video
               src={experienceVideo}
-              alt="Animation du parcours de Hiba"
               className="relative mx-auto w-full max-w-sm object-contain"
               autoPlay
               muted
@@ -109,36 +111,34 @@ function Experience() {
             </p>
           </aside>
 
-          <div className="relative space-y-5 before:absolute before:left-6 before:top-5 before:h-[calc(100%-2.5rem)] before:w-px before:bg-primary/25">
+          <div className="relative space-y-4 before:absolute before:left-0 before:top-5 before:h-[calc(100%-2.5rem)] before:w-px before:bg-primary/15">
             {steps.map((step, index) => {
-              const Icon = step.icon;
-
               return (
                 <motion.article
                   key={step.year}
-                  className="relative grid gap-5 rounded-md border border-primary/15 bg-paper p-5 pl-20 shadow-[8px_8px_0_color-mix(in_oklab,var(--primary)_10%,transparent)] transition duration-300 hover:-translate-y-1 hover:border-accent/60 md:grid-cols-[10rem_1fr] md:items-start md:pl-6"
+                  className="relative rounded-lg border border-primary/15 bg-paper p-6 transition duration-300 hover:border-accent/50 hover:shadow-lg"
                   initial={{ opacity: 0, y: 22 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.35 }}
                   transition={{ duration: 0.5, delay: index * 0.08 }}
                 >
-                  <div className="absolute left-0 top-5 z-10 grid size-12 translate-x-0 place-items-center rounded-full border border-primary/20 bg-background text-primary shadow-sm md:relative md:left-auto md:top-auto md:translate-x-0">
-                    <Icon className="size-5" />
-                  </div>
+                  <div className="flex flex-col gap-3">
+                    {/* Title and Year */}
+                    <div>
+                      <h3 className="text-2xl font-bold text-primary">{step.title}</h3>
+                      <span className="text-xs font-semibold uppercase text-accent mt-1 block">{step.year}</span>
+                    </div>
 
-                  <div className="md:col-start-1 md:row-start-1 md:ml-16">
-                    <span className="text-xs font-semibold uppercase text-accent">{step.year}</span>
-                    <p className="mt-2 font-editorial text-2xl text-primary">0{index + 1}</p>
-                  </div>
+                    {/* Company Name */}
+                    <p className="text-sm text-muted-foreground">
+                      <span className="font-semibold text-primary">{step.company}</span>
+                    </p>
 
-                  <div className="md:col-start-2 md:row-start-1">
-                    <h3 className="text-3xl text-primary">{step.title}</h3>
-                    <p className="mt-4 text-sm leading-7 text-muted-foreground">{step.text}</p>
-
-                    <div className="mt-6 flex items-center justify-between gap-4 border-t border-primary/15 pt-5">
+                    {/* Attestation */}
+                    <div className="mt-4 flex items-center justify-between gap-4 border-t border-primary/15 pt-4">
                       <div className="flex items-center gap-3">
-                        <span className="grid size-10 place-items-center rounded-md border border-primary/20 bg-background text-accent">
-                          <FileText className="size-5" />
+                        <span className="grid size-9 place-items-center rounded-md border border-primary/20 bg-background text-accent">
+                          <FileText className="size-4" />
                         </span>
                         <div>
                           <p className="text-sm font-semibold text-primary">Attestation de stage</p>

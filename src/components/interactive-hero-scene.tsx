@@ -64,7 +64,6 @@ export function InteractiveHeroScene() {
 
       <motion.video
         src={homeHeroVideo}
-        alt="Animation du laptop avec fleur"
         className="absolute inset-0 z-10 h-full w-full object-contain drop-shadow-xl"
         style={{ x, y }}
         initial={{ opacity: 0, scale: 0.94 }}

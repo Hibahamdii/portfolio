@@ -1,6 +1,23 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Code2, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
+import {
+  SiReact,
+  SiTypescript,
+  SiTailwindcss,
+  SiAngular,
+  SiFlutter,
+  SiPython,
+  SiNodedotjs,
+  SiPostgresql,
+  SiFigma,
+  SiGit,
+  SiDocker,
+  SiFramer,
+  SiNextdotjs,
+  SiVite,
+  SiJavascript,
+} from "react-icons/si";
 import { InteractiveHeroScene } from "@/components/interactive-hero-scene";
 import { Button } from "@/components/ui/button";
 import { PageLayout } from "@/components/page-layout";
@@ -28,6 +45,24 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const technologies = [
+    { Icon: SiReact, name: "React", color: "#61DAFB" },
+    { Icon: SiTypescript, name: "TypeScript", color: "#3178C6" },
+    { Icon: SiTailwindcss, name: "Tailwind", color: "#06B6D4" },
+    { Icon: SiAngular, name: "Angular", color: "#DD0031" },
+    { Icon: SiFlutter, name: "Flutter", color: "#02569B" },
+    { Icon: SiPython, name: "Python", color: "#3776AB" },
+    { Icon: SiNodedotjs, name: "Node.js", color: "#339933" },
+    { Icon: SiPostgresql, name: "PostgreSQL", color: "#336791" },
+    { Icon: SiFigma, name: "Figma", color: "#F24E1E" },
+    { Icon: SiGit, name: "Git", color: "#F1502F" },
+    { Icon: SiDocker, name: "Docker", color: "#2496ED" },
+    { Icon: SiFramer, name: "Framer Motion", color: "#0055FF" },
+    { Icon: SiNextdotjs, name: "Next.js", color: "#000000" },
+    { Icon: SiVite, name: "Vite", color: "#646CFF" },
+    { Icon: SiJavascript, name: "JavaScript", color: "#F7DF1E" },
+  ];
+
   return (
     <PageLayout>
       <main>
@@ -88,13 +123,40 @@ function Home() {
           </div>
         </section>
 
-        <section className="bg-primary px-5 py-12 text-primary-foreground">
-          <div className="mx-auto flex max-w-7xl flex-col justify-between gap-5 sm:flex-row sm:items-center">
-            <p className="font-display text-3xl">Le jardin est en croissance.</p>
-            <p className="max-w-lg text-sm leading-6 text-primary-foreground/75">
-              Chaque projet est une nouvelle branche : recherche, expérimentation, code, puis une
-              idée qui prend vie.
-            </p>
+        {/* Removed standalone Technologies section; moved carousel into green strip below */}
+
+        <section className="bg-primary px-5 py-8 text-primary-foreground">
+          <div className="mx-auto max-w-7xl">
+            {/* Auto-scrolling carousel of technology logos inside the green strip (reduced height) */}
+            <div className="relative overflow-hidden py-4">
+              <style>{`
+                @keyframes scrollX { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+                .carousel-track { display:flex; gap:1rem; align-items:center; }
+                .carousel-animate { animation: scrollX 20s linear infinite; }
+              `}</style>
+
+              <div className="carousel-track carousel-animate">
+                {technologies.map((tech) => {
+                  const Icon = tech.Icon;
+                  return (
+                    <div key={tech.name} className="flex-shrink-0 flex items-center justify-center w-24 h-16 rounded-lg bg-primary-foreground/5 border border-primary-foreground/10">
+                      <Icon className="text-primary-foreground text-2xl" />
+                    </div>
+                  );
+                })}
+
+                {/* duplicate for seamless scroll */}
+                {technologies.map((tech) => {
+                  const Icon = tech.Icon;
+                  return (
+                    <div key={`${tech.name}-dup`} className="flex-shrink-0 flex items-center justify-center w-24 h-16 rounded-lg bg-primary-foreground/5 border border-primary-foreground/10">
+                      <Icon className="text-primary-foreground text-2xl" />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            {/* sentence removed as requested */}
           </div>
         </section>
       </main>

@@ -21,6 +21,9 @@ import {
 import { InteractiveHeroScene } from "@/components/interactive-hero-scene";
 import { Button } from "@/components/ui/button";
 import { PageLayout } from "@/components/page-layout";
+import projectEcolens from "@/assets/project-ecolens.jpg";
+import projectMedina from "@/assets/project-medina.jpg";
+import projectNabta from "@/assets/project-nabta.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -120,6 +123,130 @@ function Home() {
                 </span>
               </div>
             </motion.div>
+          </div>
+        </section>
+
+        {/* Projects preview */}
+        <section className="mx-auto max-w-7xl px-5 py-16 lg:px-10">
+          <header className="mb-10 max-w-3xl">
+            <p className="mb-3 text-sm font-semibold uppercase text-accent">Mon laboratoire creatif</p>
+            <h2 className="text-4xl text-primary sm:text-5xl">Des idées qui prennent racine.</h2>
+            <p className="mt-4 text-sm text-muted-foreground">Sélection de projets récents en web, IoT et IA.</p>
+          </header>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                id: "1",
+                title: "Système intelligent d'irrigation LoRaWAN",
+                displayDate: "Feb 2026 - Jun 2026",
+                description:
+                  "Plateforme d'agriculture intelligente avec capteurs, IA et tableau de bord de gestion.",
+                image_url: projectNabta,
+              },
+              {
+                id: "2",
+                title: "Hotel Management System",
+                displayDate: "Jul 2026",
+                description:
+                  "Système complet de gestion hôtelière: réservations, facturation et monitoring.",
+                image_url: projectEcolens,
+              },
+              {
+                id: "3",
+                title: "Portfolio Multimédia",
+                displayDate: "2026",
+                description: "Portfolio créatif responsive avec animations et intégration multimédia.",
+                image_url: projectMedina,
+              },
+            ].map((p) => (
+              <article key={p.id} className="group overflow-hidden rounded-lg border border-primary/15 bg-paper">
+                {p.image_url && (
+                  <div className="relative aspect-[4/3] overflow-hidden bg-primary/5">
+                    <img src={p.image_url} alt={p.title} className="w-full h-full object-cover" />
+                  </div>
+                )}
+                <div className="p-4">
+                  <h3 className="text-lg font-bold text-primary">{p.title}</h3>
+                  <span className="text-xs text-accent/80">{p.displayDate}</span>
+                  <p className="mt-2 text-sm text-muted-foreground">{p.description}</p>
+                  <div className="mt-4">
+                    <Button variant="gardenOutline" size="sm" asChild>
+                      <a href="/projets">Voir tous les projets</a>
+                    </Button>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* Skills preview */}
+        <section className="mx-auto max-w-7xl px-5 py-16 lg:px-10">
+          <header className="mb-10">
+            <p className="text-sm font-semibold uppercase text-accent">Ma boite a outils</p>
+            <h2 className="mt-3 text-4xl text-primary sm:text-5xl">Web, mobile, IoT et IA</h2>
+          </header>
+
+          <div className="grid gap-px overflow-hidden border border-primary/20 bg-primary/20 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              { title: "Developpement Web", items: ["HTML5","CSS3","JavaScript","TypeScript","React","Angular","Tailwind","Git"] },
+              { title: "Mobile & IoT", items: ["Flutter","Dart","MQTT","Python","SQL"] },
+              { title: "Data & IA", items: ["Python","TensorFlow","Scikit-learn","Pandas","NumPy","Jupyter"] },
+              { title: "Design", items: ["Figma","Blender"] },
+            ].map(({ title, items }) => (
+              <section key={title} className="bg-background/95 p-7">
+                <h3 className="text-2xl text-primary">{title}</h3>
+                <ul className="mt-6 grid gap-3">
+                  {items.map((it) => (
+                    <li key={it} className="flex items-center gap-3 border border-primary/15 bg-paper p-3">
+                      <span className="text-xs font-semibold">{it}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+        </section>
+
+        {/* Experience preview */}
+        <section className="mx-auto max-w-7xl px-5 py-16 lg:px-10">
+          <header className="mb-8">
+            <p className="text-sm font-semibold uppercase text-accent">Mon parcours pratique</p>
+            <h2 className="text-4xl text-primary sm:text-5xl">Une progression entre création et technique</h2>
+          </header>
+
+          <div className="space-y-6">
+            {[
+              {
+                year: "2023-2024",
+                title: "Formation & premiers stages",
+                company: "Higher Institute of Technological Studies of Sidi Bouzid",
+                text: "Debuts et premiers stages d'initiation en telecom et developpement.",
+              },
+              {
+                year: "2025-2026",
+                title: "Projet de fin d'etudes - IoT & IA",
+                company: "Smart Ways Innovation",
+                text: "Stage PFE: systeme d'irrigation intelligent basé sur LoRaWAN et IA.",
+              },
+              {
+                year: "Juillet 2026 - Auj.",
+                title: "Stage de perfectionnement professionnel",
+                company: "ATS Informatique Sidi Bouzid",
+                text: "Perfectionnement en developpement et procedures professionnelles.",
+              },
+            ].map((s) => (
+              <article key={s.year} className="rounded-lg border border-primary/15 bg-paper p-6">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h3 className="text-xl font-bold text-primary">{s.title}</h3>
+                    <span className="text-xs text-accent/80">{s.year} · {s.company}</span>
+                    <p className="mt-2 text-sm text-muted-foreground">{s.text}</p>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ExternalLink, Github, FileText, Presentation, ChevronLeft, ChevronRight } from "lucide-react";
+import { Github, FileText, Presentation, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { PageLayout } from "@/components/page-layout";
 import { Button } from "@/components/ui/button";
@@ -66,7 +66,9 @@ const projects = [
   },
 ];
 
-function Projects() {
+type ContentWrapper = "main" | "section";
+
+export function ProjectsContent({ as: Wrapper = "main" }: { as?: ContentWrapper } = {}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const itemsPerPage = 3;
   const totalPages = Math.ceil(projects.length / itemsPerPage);
@@ -87,10 +89,8 @@ function Projects() {
       setActiveIndex((currentPage - 1) * itemsPerPage);
     }
   };
-
   return (
-    <PageLayout>
-      <main className="mx-auto max-w-7xl px-5 py-16 lg:px-10">
+      <Wrapper className="mx-auto max-w-7xl px-5 py-16 lg:px-10">
         <header className="mb-12 max-w-3xl">
           <p className="mb-3 text-sm font-semibold uppercase text-accent">
             Mon laboratoire creatif
@@ -284,7 +284,14 @@ function Projects() {
             </div>
           </div>
         )}
-      </main>
+      </Wrapper>
+  );
+}
+
+export default function Projects() {
+  return (
+    <PageLayout>
+      <ProjectsContent />
     </PageLayout>
   );
 }

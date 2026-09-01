@@ -27,12 +27,13 @@ export const Route = createFileRoute("/contact")({
   component: Contact,
 });
 
-function Contact() {
+type ContentWrapper = "main" | "section";
+
+export function ContactContent({ as: Wrapper = "main" }: { as?: ContentWrapper } = {}) {
   const [sent, setSent] = useState(false);
 
   return (
-    <PageLayout>
-      <main className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-[0.75fr_1.25fr] lg:px-10">
+      <Wrapper className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-[0.75fr_1.25fr] lg:px-10">
         <section className="self-center">
           <p className="text-sm font-semibold uppercase text-accent">Un projet en tete ?</p>
           <h1 className="mt-3 text-5xl text-primary sm:text-6xl">
@@ -118,7 +119,14 @@ function Contact() {
             />
           </div>
         </section>
-      </main>
+      </Wrapper>
+  );
+}
+
+export default function Contact() {
+  return (
+    <PageLayout>
+      <ContactContent />
     </PageLayout>
   );
 }

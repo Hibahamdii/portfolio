@@ -54,10 +54,11 @@ const steps = [
 
 const highlights = ["Design", "Code", "Data", "IA"];
 
-function Experience() {
+type ContentWrapper = "main" | "section";
+
+export function ExperienceContent({ as: Wrapper = "main" }: { as?: ContentWrapper } = {}) {
   return (
-    <PageLayout>
-      <main className="mx-auto max-w-7xl px-5 py-14 lg:px-10 lg:py-18">
+      <Wrapper className="mx-auto max-w-7xl px-5 py-14 lg:px-10 lg:py-18">
         <header className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <motion.section
             initial={{ opacity: 0, y: 24 }}
@@ -102,40 +103,42 @@ function Experience() {
           </motion.div>
         </header>
 
-        <section className="mt-16 grid gap-10 lg:grid-cols-[18rem_1fr] lg:items-start">
-          <aside className="lg:sticky lg:top-28">
-            <p className="text-sm font-semibold uppercase text-accent">Timeline</p>
-            <h2 className="mt-3 text-4xl text-primary">Etapes cles</h2>
-            <p className="mt-4 text-sm leading-7 text-muted-foreground">
-              Une lecture simple du parcours, du multimedia vers la data et l'IA.
-            </p>
-          </aside>
-
-          <div className="relative space-y-4 before:absolute before:left-0 before:top-5 before:h-[calc(100%-2.5rem)] before:w-px before:bg-primary/15">
+        <section className="mt-14">
+          <div className="relative mx-auto max-w-5xl space-y-6 pb-16">
             {steps.map((step, index) => {
+              const Icon = step.icon;
+
               return (
                 <motion.article
                   key={step.year}
-                  className="relative rounded-lg border border-primary/15 bg-paper p-6 transition duration-300 hover:border-accent/50 hover:shadow-lg"
-                  initial={{ opacity: 0, y: 22 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.35 }}
-                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                  className="sticky rounded-lg border border-primary/15 bg-paper p-6 shadow-[12px_12px_0_color-mix(in_oklab,var(--primary)_10%,transparent)] transition duration-300 hover:border-accent/50 hover:shadow-lg sm:p-7"
+                  style={{
+                    top: `calc(5.5rem + ${index * 1.15}rem)`,
+                    zIndex: 10 + index,
+                  }}
+                  initial={{ opacity: 0, y: 42, scale: 0.97 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: false, amount: 0.45 }}
+                  transition={{ duration: 0.55, delay: index * 0.08, ease: "easeOut" }}
                 >
-                  <div className="flex flex-col gap-3">
-                    {/* Title and Year */}
-                    <div>
-                      <h3 className="text-2xl font-bold text-primary">{step.title}</h3>
-                      <span className="text-xs font-semibold uppercase text-accent mt-1 block">{step.year}</span>
+                  <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-start">
+                    <div className="flex gap-4">
+                      <span className="grid size-12 shrink-0 place-items-center rounded-md border border-primary/20 bg-background text-accent">
+                        <Icon className="size-6" />
+                      </span>
+                      <div>
+                        <h3 className="text-2xl font-bold text-primary">{step.title}</h3>
+                        <span className="mt-1 block text-xs font-semibold uppercase text-accent">
+                          {step.year}
+                        </span>
+                        <p className="mt-3 text-sm text-muted-foreground">
+                          <span className="font-semibold text-primary">{step.company}</span>
+                        </p>
+                        <p className="mt-3 text-sm leading-7 text-muted-foreground">{step.text}</p>
+                      </div>
                     </div>
 
-                    {/* Company Name */}
-                    <p className="text-sm text-muted-foreground">
-                      <span className="font-semibold text-primary">{step.company}</span>
-                    </p>
-
-                    {/* Attestation */}
-                    <div className="mt-4 flex items-center justify-between gap-4 border-t border-primary/15 pt-4">
+                    <div className="flex items-center justify-between gap-4 border-t border-primary/15 pt-4 lg:min-w-64 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
                       <div className="flex items-center gap-3">
                         <span className="grid size-9 place-items-center rounded-md border border-primary/20 bg-background text-accent">
                           <FileText className="size-4" />
@@ -171,7 +174,14 @@ function Experience() {
         </section>
 
 
-      </main>
+      </Wrapper>
+  );
+}
+
+export default function Experience() {
+  return (
+    <PageLayout>
+      <ExperienceContent />
     </PageLayout>
   );
 }

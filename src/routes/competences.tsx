@@ -94,19 +94,20 @@ const groups = [
   },
 ];
 
-function Skills() {
+type ContentWrapper = "main" | "section";
+
+export function SkillsContent({ as: Wrapper = "main" }: { as?: ContentWrapper } = {}) {
   return (
-    <PageLayout>
-      <main className="mx-auto max-w-7xl px-5 py-16 lg:px-10">
-        <header className="mb-14 grid items-center gap-8 lg:grid-cols-[1fr_20rem]">
+      <Wrapper className="mx-auto max-w-7xl px-5 py-12 lg:px-10 lg:py-14">
+        <header className="mb-8 grid items-center gap-6 lg:grid-cols-[minmax(0,1fr)_14rem]">
           <div>
             <p className="text-sm font-semibold uppercase text-accent">Ma boite a outils</p>
-            <h1 className="mt-3 text-5xl text-primary sm:text-6xl">
+            <h1 className="mt-3 text-4xl text-primary sm:text-5xl">
               Web, mobile, IoT
               <br />
               et intelligence artificielle.
             </h1>
-            <p className="mt-6 max-w-2xl text-sm leading-7 text-muted-foreground">
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground">
               Expertise en developpement multiplateforme, programmation IoT avec LoRaWAN, et machine
               learning pour des solutions numeriques innovantes.
             </p>
@@ -116,7 +117,7 @@ function Skills() {
             aria-label="Animation des compétences de Hiba"
             width={1024}
             height={1024}
-            className="mx-auto w-full max-w-xs object-contain"
+            className="mx-auto hidden w-full max-w-56 object-contain sm:block"
             src={skillsVideo}
             autoPlay
             muted
@@ -124,20 +125,27 @@ function Skills() {
           />
         </header>
 
-        <div className="grid gap-px overflow-hidden border border-primary/20 bg-primary/20 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid items-start gap-4 md:grid-cols-2 xl:grid-cols-4">
           {groups.map(({ icon: Icon, title, items }) => (
-            <section key={title} className="bg-background/95 p-7 backdrop-blur-sm lg:p-9">
-              <Icon className="size-10 text-accent" />
-              <h2 className="mt-5 text-3xl text-primary">{title}</h2>
-              <ul className="mt-7 grid gap-3">
+            <section
+              key={title}
+              className="border border-primary/15 bg-background/90 p-5 shadow-[8px_8px_0_color-mix(in_oklab,var(--primary)_10%,transparent)] backdrop-blur-sm transition duration-300 hover:border-accent/50 hover:bg-paper"
+            >
+              <div className="flex items-center gap-3">
+                <span className="grid size-10 shrink-0 place-items-center rounded-md border border-primary/20 bg-paper text-accent">
+                  <Icon className="size-5" />
+                </span>
+                <h2 className="text-2xl text-primary">{title}</h2>
+              </div>
+              <ul className="mt-5 flex flex-wrap gap-2">
                 {items.map(({ name, logo: Logo }) => (
                   <li
                     key={name}
-                    className="group flex items-center gap-3 border border-primary/15 bg-paper p-3 transition-colors hover:border-accent"
+                    className="group inline-flex items-center gap-2 rounded-md border border-primary/15 bg-paper px-3 py-2 transition-colors hover:border-accent hover:bg-background"
                   >
                     <Logo
                       aria-hidden="true"
-                      className="size-6 text-primary transition-colors group-hover:text-accent"
+                      className="size-4 text-primary transition-colors group-hover:text-accent"
                     />
                     <span className="text-xs font-semibold text-foreground">{name}</span>
                   </li>
@@ -146,7 +154,14 @@ function Skills() {
             </section>
           ))}
         </div>
-      </main>
+      </Wrapper>
+  );
+}
+
+export default function Skills() {
+  return (
+    <PageLayout>
+      <SkillsContent />
     </PageLayout>
   );
 }

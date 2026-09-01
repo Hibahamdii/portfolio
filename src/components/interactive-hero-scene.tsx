@@ -34,7 +34,7 @@ export function InteractiveHeroScene() {
 
   return (
     <div
-      className="hero-scene relative mx-auto aspect-square w-full max-w-[560px]"
+      className="hero-scene relative mx-auto aspect-square w-full max-w-[min(100%,560px)]"
       onMouseMove={handlePointerMove}
       onMouseLeave={resetPointer}
     >

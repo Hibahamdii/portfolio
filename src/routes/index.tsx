@@ -24,6 +24,9 @@ import { PageLayout } from "@/components/page-layout";
 import projectEcolens from "@/assets/project-ecolens.jpg";
 import projectMedina from "@/assets/project-medina.jpg";
 import projectNabta from "@/assets/project-nabta.jpg";
+import skillsVideo from "@/assets/anim-desk-chair-transparent.webm";
+import experienceVideo from "@/assets/anim-whiteboard-transparent.webm";
+import contactImage from "@/assets/hiba-contact-pose.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -81,6 +84,39 @@ function Home() {
               className="relative order-2 lg:order-1"
             >
               <InteractiveHeroScene />
+
+              {/* Carousel placed under hero image so it stays directly below on large screens */}
+              <div className="mt-8 lg:mt-6">
+                <div className="bg-primary px-4 py-3 rounded-lg">
+                  <style>{`
+                    @keyframes scrollX { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+                    .carousel-track { display:flex; gap:1rem; align-items:center; }
+                    .carousel-animate { animation: scrollX 20s linear infinite; }
+                  `}</style>
+
+                  <div className="overflow-hidden">
+                    <div className="carousel-track carousel-animate py-2">
+                      {technologies.map((tech) => {
+                        const Icon = tech.Icon;
+                        return (
+                          <div key={tech.name} className="flex-shrink-0 flex items-center justify-center w-20 h-12 rounded-md bg-primary-foreground/5 border border-primary-foreground/10">
+                            <Icon className="text-primary-foreground text-xl" />
+                          </div>
+                        );
+                      })}
+
+                      {technologies.map((tech) => {
+                        const Icon = tech.Icon;
+                        return (
+                          <div key={`${tech.name}-dup`} className="flex-shrink-0 flex items-center justify-center w-20 h-12 rounded-md bg-primary-foreground/5 border border-primary-foreground/10">
+                            <Icon className="text-primary-foreground text-xl" />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </motion.div>
 
             <motion.div
@@ -207,6 +243,16 @@ function Home() {
               </section>
             ))}
           </div>
+              <div className="mt-6 lg:mt-0">
+                <video
+                  aria-hidden
+                  src={skillsVideo}
+                  className="mx-auto w-full max-w-xs object-contain"
+                  autoPlay
+                  muted
+                  loop
+                />
+              </div>
         </section>
 
         {/* Experience preview */}
@@ -248,44 +294,39 @@ function Home() {
               </article>
             ))}
           </div>
-        </section>
-
-        {/* Removed standalone Technologies section; moved carousel into green strip below */}
-
-        <section className="bg-primary px-5 py-8 text-primary-foreground">
-          <div className="mx-auto max-w-7xl">
-            {/* Auto-scrolling carousel of technology logos inside the green strip (reduced height) */}
-            <div className="relative overflow-hidden py-4">
-              <style>{`
-                @keyframes scrollX { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-                .carousel-track { display:flex; gap:1rem; align-items:center; }
-                .carousel-animate { animation: scrollX 20s linear infinite; }
-              `}</style>
-
-              <div className="carousel-track carousel-animate">
-                {technologies.map((tech) => {
-                  const Icon = tech.Icon;
-                  return (
-                    <div key={tech.name} className="flex-shrink-0 flex items-center justify-center w-24 h-16 rounded-lg bg-primary-foreground/5 border border-primary-foreground/10">
-                      <Icon className="text-primary-foreground text-2xl" />
-                    </div>
-                  );
-                })}
-
-                {/* duplicate for seamless scroll */}
-                {technologies.map((tech) => {
-                  const Icon = tech.Icon;
-                  return (
-                    <div key={`${tech.name}-dup`} className="flex-shrink-0 flex items-center justify-center w-24 h-16 rounded-lg bg-primary-foreground/5 border border-primary-foreground/10">
-                      <Icon className="text-primary-foreground text-2xl" />
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-            {/* sentence removed as requested */}
+          <div className="mt-8">
+            <video
+              aria-hidden
+              src={experienceVideo}
+              className="mx-auto w-full max-w-sm object-contain"
+              autoPlay
+              muted
+              loop
+            />
           </div>
         </section>
+
+        {/* Contact preview */}
+        <section className="mx-auto max-w-7xl px-5 py-16 lg:px-10">
+          <div className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr] items-center">
+            <div>
+              <p className="text-sm font-semibold uppercase text-accent">Un projet en tete ?</p>
+              <h2 className="mt-3 text-4xl text-primary sm:text-5xl">Faisons croitre une innovation.</h2>
+              <p className="mt-4 max-w-lg text-sm text-muted-foreground">Developpeuse IoT & IA passionnée — disponible pour collaborations et stages.</p>
+              <div className="mt-6">
+                <Button variant="garden" size="lg" asChild>
+                  <a href="/contact">Me contacter</a>
+                </Button>
+              </div>
+            </div>
+
+            <div className="mx-auto w-full max-w-sm">
+              <img src={contactImage} alt="Hiba contact" className="w-full object-contain" />
+            </div>
+          </div>
+        </section>
+
+        {/* standalone carousel removed — now embedded under hero image */}
       </main>
     </PageLayout>
   );

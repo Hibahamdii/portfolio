@@ -1,12 +1,17 @@
 import type { MouseEvent } from "react";
-import { motion, useMotionValue, useSpring } from "motion/react";
 import { BrainCircuit, Braces, Code2, Database, Sparkles } from "lucide-react";
-import avatar from "@/assets/hiba-coding-back.png";
+import { motion, useMotionValue, useSpring } from "motion/react";
+import homeHeroVideo from "@/assets/anim-laptop-floor-transparent.webm";
 
 const techMarks = [
   { label: "Python", short: "Py", icon: Code2, position: "left-[2%] top-[16%]" },
   { label: "JavaScript", short: "JS", icon: Braces, position: "right-[2%] top-[8%]" },
-  { label: "Intelligence artificielle", short: "IA", icon: BrainCircuit, position: "right-[-1%] top-[40%]" },
+  {
+    label: "Intelligence artificielle",
+    short: "IA",
+    icon: BrainCircuit,
+    position: "right-[-1%] top-[40%]",
+  },
   { label: "Data Science", short: "Data", icon: Database, position: "left-[-2%] top-[47%]" },
 ] as const;
 
@@ -51,30 +56,39 @@ export function InteractiveHeroScene() {
           <span className="grid size-12 place-items-center rounded-md border border-primary/25 bg-paper text-accent shadow-md sm:size-14">
             <Icon className="size-5 sm:size-6" aria-hidden="true" />
           </span>
-          <span className="mt-1 block text-center text-[10px] font-semibold text-primary sm:text-xs">{short}</span>
+          <span className="mt-1 block text-center text-[10px] font-semibold text-primary sm:text-xs">
+            {short}
+          </span>
         </motion.div>
       ))}
 
-      <motion.img
-        src={avatar}
-        alt="Illustration de Hiba vue de dos, en train d'écrire du code sur son ordinateur"
-        width={1024}
-        height={1024}
+      <motion.video
+        src={homeHeroVideo}
+        alt="Animation du laptop avec fleur"
         className="absolute inset-0 z-10 h-full w-full object-contain drop-shadow-xl"
         style={{ x, y }}
         initial={{ opacity: 0, scale: 0.94 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
+        autoPlay
+        muted
+        loop
       />
 
-      <Sparkles className="absolute bottom-[13%] right-[12%] z-20 size-8 animate-pulse text-accent" aria-hidden="true" />
+      <Sparkles
+        className="absolute bottom-[13%] right-[12%] z-20 size-8 animate-pulse text-accent"
+        aria-hidden="true"
+      />
     </div>
   );
 }
 
 export function FallingGarden() {
   return (
-    <div className="falling-garden pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
+    <div
+      className="falling-garden pointer-events-none fixed inset-0 z-0 overflow-hidden"
+      aria-hidden="true"
+    >
       {Array.from({ length: 14 }, (_, index) => (
         <span key={index} className={index % 3 === 0 ? "garden-petal" : "garden-leaf"} />
       ))}

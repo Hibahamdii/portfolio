@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { BrainCircuit, BriefcaseBusiness, CodeXml, FileText } from "lucide-react";
 import { PageLayout } from "@/components/page-layout";
-import experiencePose from "@/assets/hiba-experience-pose.png";
+import experienceVideo from "@/assets/anim-whiteboard-transparent.webm";
 
 export const Route = createFileRoute("/experience")({
   head: () => ({
@@ -15,7 +15,8 @@ export const Route = createFileRoute("/experience")({
       { property: "og:title", content: "Experience - Hiba Hamdi" },
       {
         property: "og:description",
-        content: "Un parcours pratique entre developpement, creation numerique et intelligence artificielle.",
+        content:
+          "Un parcours pratique entre developpement, creation numerique et intelligence artificielle.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -65,8 +66,8 @@ function Experience() {
               Une progression entre creation, technique et experimentation.
             </h1>
             <p className="mt-6 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
-              Chaque experience m'aide a transformer une idee en interface, un besoin en
-              prototype, et une curiosite technique en projet concret.
+              Chaque experience m'aide a transformer une idee en interface, un besoin en prototype,
+              et une curiosite technique en projet concret.
             </p>
 
             <div className="mt-8 grid max-w-2xl grid-cols-2 gap-px overflow-hidden border border-primary/20 bg-primary/20 sm:grid-cols-4">
@@ -88,12 +89,13 @@ function Experience() {
             transition={{ duration: 0.65, delay: 0.1 }}
           >
             <div className="absolute inset-x-10 bottom-4 h-24 rounded-full bg-forest-soft blur-2xl" />
-            <img
-              src={experiencePose}
-              alt="Hiba presentant son parcours en code, data et intelligence artificielle"
-              width={1024}
-              height={1024}
+            <video
+              src={experienceVideo}
+              alt="Animation du parcours de Hiba"
               className="relative mx-auto w-full max-w-sm object-contain"
+              autoPlay
+              muted
+              loop
             />
           </motion.div>
         </header>
@@ -126,9 +128,7 @@ function Experience() {
 
                   <div className="md:col-start-1 md:row-start-1 md:ml-16">
                     <span className="text-xs font-semibold uppercase text-accent">{step.year}</span>
-                    <p className="mt-2 font-editorial text-2xl text-primary">
-                      0{index + 1}
-                    </p>
+                    <p className="mt-2 font-editorial text-2xl text-primary">0{index + 1}</p>
                   </div>
 
                   <div className="md:col-start-2 md:row-start-1">
@@ -169,6 +169,8 @@ function Experience() {
             })}
           </div>
         </section>
+
+
       </main>
     </PageLayout>
   );

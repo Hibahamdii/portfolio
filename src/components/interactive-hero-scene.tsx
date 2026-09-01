@@ -10,9 +10,9 @@ const techMarks = [
     label: "Intelligence artificielle",
     short: "IA",
     icon: BrainCircuit,
-    position: "right-[-1%] top-[40%]",
+    position: "right-[2%] top-[40%]",
   },
-  { label: "Data Science", short: "Data", icon: Database, position: "left-[-2%] top-[47%]" },
+  { label: "Data Science", short: "Data", icon: Database, position: "left-[2%] top-[47%]" },
 ] as const;
 
 export function InteractiveHeroScene() {

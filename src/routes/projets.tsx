@@ -3,9 +3,9 @@ import { Github, FileText, Presentation, ChevronLeft, ChevronRight } from "lucid
 import { useState } from "react";
 import { PageLayout } from "@/components/page-layout";
 import { Button } from "@/components/ui/button";
-import projectEcolens from "@/assets/project-ecolens.jpg";
-import projectMedina from "@/assets/project-medina.jpg";
-import projectNabta from "@/assets/project-nabta.jpg";
+import projectHotelManagement from "@/assets/project-hotel-management.png";
+import projectPortfolioMockup from "@/assets/project-portfolio-mockup.png";
+import projectSmartIrrigationMockup from "@/assets/project-smart-irrigation-mockup.png";
 
 export const Route = createFileRoute("/projets")({
   head: () => ({
@@ -35,10 +35,10 @@ const projects = [
     description: "Plateforme d'agriculture intelligente avec capteurs (humidité/température). L'IA combine données météorologiques et historique pour prédire les besoins en eau. Interface mobile pour alertes et contrôle, tableau de bord web pour gestion des parcelles.",
     tools: ["Angular", "Flutter", "LoRaWAN", "Machine Learning", "MQTT"],
     github_url: "https://github.com",
-    report_url: "/assets/rapport-smart-irrigation.pdf",
+    report_url: "/rapport-smart-irrigation.pdf",
     presentation_url: "https://1drv.ms/p/c/ea8750f8cea2756a/IQALnzzE2wkMR7SS6Sywn3NoAY8ZBh-gFjPWMSPaKqwcsfo",
     displayDate: "Feb 2026 - Jun 2026",
-    image_url: projectNabta,
+    image_url: projectSmartIrrigationMockup,
   },
   {
     id: "2",
@@ -47,10 +47,10 @@ const projects = [
     description: "Système complet de gestion hôtelière pour numériser et automatiser les opérations. Gestion des réservations, check-in/out, facturation automatisée, et tableau de bord pour suivi du statut des chambres en temps réel.",
     tools: ["Python", "SQL", "Backend", "Database"],
     github_url: "https://github.com",
-    report_url: "/assets/rapport-hotel-management.pdf",
+    report_url: "/rapport-hotel-management.pdf",
     presentation_url: "",
     displayDate: "Jul 2026",
-    image_url: projectEcolens,
+    image_url: projectHotelManagement,
   },
   {
     id: "3",
@@ -62,7 +62,7 @@ const projects = [
     report_url: "",
     presentation_url: "",
     displayDate: "2026",
-    image_url: projectMedina,
+    image_url: projectPortfolioMockup,
   },
 ];
 

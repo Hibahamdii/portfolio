@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { BrainCircuit, BriefcaseBusiness, CodeXml, FileText } from "lucide-react";
 import { PageLayout } from "@/components/page-layout";
 import { useIosTransparentVideoFallback } from "@/lib/use-ios-transparent-video-fallback";
-import experienceFallback from "@/assets/hiba-experience-pose.png";
+import experienceFallback from "@/assets/anim-whiteboard-v2-transparent.webp";
 import experienceVideo from "@/assets/anim-whiteboard-v2-transparent.webm";
 
 export const Route = createFileRoute("/experience")({
@@ -99,7 +99,7 @@ export function ExperienceContent({ as: Wrapper = "main" }: { as?: ContentWrappe
             {useFallback ? (
               <img
                 src={experienceFallback}
-                alt="Illustration du parcours de Hiba"
+                alt="Animation du parcours de Hiba"
                 className="relative mx-auto w-full max-w-sm object-contain"
                 loading="lazy"
               />

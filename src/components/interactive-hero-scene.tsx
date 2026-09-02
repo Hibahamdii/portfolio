@@ -3,7 +3,7 @@ import { BrainCircuit, Braces, Code2, Database, Sparkles } from "lucide-react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 import { useIosTransparentVideoFallback } from "@/lib/use-ios-transparent-video-fallback";
 import homeHeroVideo from "@/assets/anim-crosslegged-transparent.webm";
-import homeHeroFallback from "@/assets/hiba-avatar.png";
+import homeHeroFallback from "@/assets/anim-crosslegged-transparent.webp";
 
 const techMarks = [
   { label: "Python", short: "Py", icon: Code2, position: "left-[2%] top-[16%]" },
@@ -68,7 +68,7 @@ export function InteractiveHeroScene() {
       {useFallback ? (
         <motion.img
           src={homeHeroFallback}
-          alt="Illustration de Hiba"
+          alt="Animation de Hiba"
           className="absolute inset-0 z-10 h-full w-full object-contain drop-shadow-xl"
           style={{ x, y }}
           initial={{ opacity: 0, scale: 0.94 }}

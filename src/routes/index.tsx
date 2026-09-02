@@ -22,7 +22,7 @@ import { InteractiveHeroScene } from "@/components/interactive-hero-scene";
 import { PageLayout } from "@/components/page-layout";
 import { Button } from "@/components/ui/button";
 import { useIosTransparentVideoFallback } from "@/lib/use-ios-transparent-video-fallback";
-import aboutPeekingFallback from "@/assets/hiba-about-peeking.png";
+import aboutPeekingFallback from "@/assets/hiba-peeking-anim.webp";
 import aboutPeekingVideo from "@/assets/hiba-peeking-anim.webm";
 
 export const Route = createFileRoute("/")({
@@ -120,7 +120,7 @@ function AboutContent() {
           {useFallback ? (
             <img
               src={aboutPeekingFallback}
-              alt="Hiba regardant avec curiosite le contenu de la section"
+              alt="Animation de Hiba regardant avec curiosite le contenu de la section"
               width={1174}
               height={539}
               loading="lazy"

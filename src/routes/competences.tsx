@@ -25,7 +25,7 @@ import {
 } from "react-icons/si";
 import { PageLayout } from "@/components/page-layout";
 import { useIosTransparentVideoFallback } from "@/lib/use-ios-transparent-video-fallback";
-import skillsFallback from "@/assets/hiba-skills-pose.png";
+import skillsFallback from "@/assets/anim-desk-chair-transparent.webp";
 import skillsVideo from "@/assets/anim-desk-chair-transparent.webm";
 
 export const Route = createFileRoute("/competences")({
@@ -127,7 +127,7 @@ export function SkillsContent({ as: Wrapper = "main" }: { as?: ContentWrapper } 
             <div className="mx-auto grid size-36 place-items-center overflow-hidden md:size-40 lg:size-44">
               {useFallback ? (
                 <img
-                  alt="Illustration des competences de Hiba"
+                  alt="Animation des competences de Hiba"
                   width={1024}
                   height={1024}
                   className="h-full w-full object-contain p-2"

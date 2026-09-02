@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { BrainCircuit, BriefcaseBusiness, CodeXml, FileText } from "lucide-react";
 import { PageLayout } from "@/components/page-layout";
+import { useIosTransparentVideoFallback } from "@/lib/use-ios-transparent-video-fallback";
+import experienceFallback from "@/assets/hiba-experience-pose.png";
 import experienceVideo from "@/assets/anim-whiteboard-v2-transparent.webm";
 
 export const Route = createFileRoute("/experience")({
@@ -57,6 +59,8 @@ const highlights = ["Design", "Code", "Data", "IA"];
 type ContentWrapper = "main" | "section";
 
 export function ExperienceContent({ as: Wrapper = "main" }: { as?: ContentWrapper } = {}) {
+  const useFallback = useIosTransparentVideoFallback();
+
   return (
       <Wrapper className="mx-auto max-w-7xl px-5 py-10 lg:px-10 lg:py-12">
         <header className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
@@ -92,13 +96,23 @@ export function ExperienceContent({ as: Wrapper = "main" }: { as?: ContentWrappe
             transition={{ duration: 0.65, delay: 0.1 }}
           >
             <div className="absolute inset-x-10 bottom-4 h-24 rounded-full bg-forest-soft blur-2xl" />
-            <video
-              src={experienceVideo}
-              className="relative mx-auto w-full max-w-sm object-contain"
-              autoPlay
-              muted
-              loop
-            />
+            {useFallback ? (
+              <img
+                src={experienceFallback}
+                alt="Illustration du parcours de Hiba"
+                className="relative mx-auto w-full max-w-sm object-contain"
+                loading="lazy"
+              />
+            ) : (
+              <video
+                src={experienceVideo}
+                className="relative mx-auto w-full max-w-sm object-contain"
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
+            )}
           </motion.div>
         </header>
 

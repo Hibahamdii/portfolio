@@ -21,6 +21,8 @@ import {
 import { InteractiveHeroScene } from "@/components/interactive-hero-scene";
 import { PageLayout } from "@/components/page-layout";
 import { Button } from "@/components/ui/button";
+import { useIosTransparentVideoFallback } from "@/lib/use-ios-transparent-video-fallback";
+import aboutPeekingFallback from "@/assets/hiba-about-peeking.png";
 import aboutPeekingVideo from "@/assets/hiba-peeking-anim.webm";
 
 export const Route = createFileRoute("/")({
@@ -99,6 +101,8 @@ function TechnologyCarousel() {
 }
 
 function AboutContent() {
+  const useFallback = useIosTransparentVideoFallback();
+
   return (
     <section
       className="relative overflow-hidden px-5 pb-20 pt-24 sm:pb-28 sm:pt-32 lg:px-10"
@@ -113,18 +117,29 @@ function AboutContent() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7 }}
         >
-          <video
-            src={aboutPeekingVideo}
-            aria-label="Hiba regardant avec curiosite le contenu de la section"
-            width={1174}
-            height={539}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            className="relative z-10 h-auto w-full object-contain"
-          />
+          {useFallback ? (
+            <img
+              src={aboutPeekingFallback}
+              alt="Hiba regardant avec curiosite le contenu de la section"
+              width={1174}
+              height={539}
+              loading="lazy"
+              className="relative z-10 h-auto w-full object-contain"
+            />
+          ) : (
+            <video
+              src={aboutPeekingVideo}
+              aria-label="Hiba regardant avec curiosite le contenu de la section"
+              width={1174}
+              height={539}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              className="relative z-10 h-auto w-full object-contain"
+            />
+          )}
           <span className="animate-drift absolute right-0 top-[18%] h-10 w-10 rotate-[-18deg] rounded-[45%_55%_45%_55%] border border-primary/30 bg-primary/10 text-primary/50" />
         </motion.div>
 

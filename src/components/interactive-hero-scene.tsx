@@ -1,7 +1,9 @@
 import type { MouseEvent } from "react";
 import { BrainCircuit, Braces, Code2, Database, Sparkles } from "lucide-react";
 import { motion, useMotionValue, useSpring } from "motion/react";
+import { useIosTransparentVideoFallback } from "@/lib/use-ios-transparent-video-fallback";
 import homeHeroVideo from "@/assets/anim-crosslegged-transparent.webm";
+import homeHeroFallback from "@/assets/hiba-avatar.png";
 
 const techMarks = [
   { label: "Python", short: "Py", icon: Code2, position: "left-[2%] top-[16%]" },
@@ -16,6 +18,7 @@ const techMarks = [
 ] as const;
 
 export function InteractiveHeroScene() {
+  const useFallback = useIosTransparentVideoFallback();
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
   const x = useSpring(pointerX, { stiffness: 80, damping: 20 });
@@ -62,17 +65,30 @@ export function InteractiveHeroScene() {
         </motion.div>
       ))}
 
-      <motion.video
-        src={homeHeroVideo}
-        className="absolute inset-0 z-10 h-full w-full object-contain drop-shadow-xl"
-        style={{ x, y }}
-        initial={{ opacity: 0, scale: 0.94 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-        autoPlay
-        muted
-        loop
-      />
+      {useFallback ? (
+        <motion.img
+          src={homeHeroFallback}
+          alt="Illustration de Hiba"
+          className="absolute inset-0 z-10 h-full w-full object-contain drop-shadow-xl"
+          style={{ x, y }}
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        />
+      ) : (
+        <motion.video
+          src={homeHeroVideo}
+          className="absolute inset-0 z-10 h-full w-full object-contain drop-shadow-xl"
+          style={{ x, y }}
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+      )}
 
       <Sparkles
         className="absolute bottom-[13%] right-[12%] z-20 size-8 animate-pulse text-accent"

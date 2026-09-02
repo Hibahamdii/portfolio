@@ -24,6 +24,8 @@ import {
   SiTypescript,
 } from "react-icons/si";
 import { PageLayout } from "@/components/page-layout";
+import { useIosTransparentVideoFallback } from "@/lib/use-ios-transparent-video-fallback";
+import skillsFallback from "@/assets/hiba-skills-pose.png";
 import skillsVideo from "@/assets/anim-desk-chair-transparent.webm";
 
 export const Route = createFileRoute("/competences")({
@@ -98,6 +100,7 @@ const groups = [
 type ContentWrapper = "main" | "section";
 
 export function SkillsContent({ as: Wrapper = "main" }: { as?: ContentWrapper } = {}) {
+  const useFallback = useIosTransparentVideoFallback();
   const [activeGroup, setActiveGroup] = useState(groups[0].title);
   const selectedGroup = useMemo(
     () => groups.find((group) => group.title === activeGroup) ?? groups[0],
@@ -122,16 +125,28 @@ export function SkillsContent({ as: Wrapper = "main" }: { as?: ContentWrapper } 
             </div>
 
             <div className="mx-auto grid size-36 place-items-center overflow-hidden md:size-40 lg:size-44">
-              <video
-                aria-label="Animation des competences de Hiba"
-                width={1024}
-                height={1024}
-                className="h-full w-full object-contain p-2"
-                src={skillsVideo}
-                autoPlay
-                muted
-                loop
-              />
+              {useFallback ? (
+                <img
+                  alt="Illustration des competences de Hiba"
+                  width={1024}
+                  height={1024}
+                  className="h-full w-full object-contain p-2"
+                  src={skillsFallback}
+                  loading="lazy"
+                />
+              ) : (
+                <video
+                  aria-label="Animation des competences de Hiba"
+                  width={1024}
+                  height={1024}
+                  className="h-full w-full object-contain p-2"
+                  src={skillsVideo}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+              )}
             </div>
           </header>
 

@@ -21,10 +21,7 @@ import {
 import { InteractiveHeroScene } from "@/components/interactive-hero-scene";
 import { PageLayout } from "@/components/page-layout";
 import { Button } from "@/components/ui/button";
-import { SkillsContent } from "@/routes/competences";
-import { ContactContent } from "@/routes/contact";
-import { ExperienceContent } from "@/routes/experience";
-import { ProjectsContent } from "@/routes/projets";
+import aboutPeekingVideo from "@/assets/hiba-peeking-anim.webm";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -101,6 +98,73 @@ function TechnologyCarousel() {
   );
 }
 
+function AboutContent() {
+  return (
+    <section
+      className="relative overflow-hidden px-5 pb-20 pt-24 sm:pb-28 sm:pt-32 lg:px-10"
+      id="a-propos"
+      aria-labelledby="about-title"
+    >
+      <div className="mx-auto max-w-5xl">
+        <motion.div
+          className="relative z-10 mx-auto w-full max-w-[760px]"
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7 }}
+        >
+          <video
+            src={aboutPeekingVideo}
+            aria-label="Hiba regardant avec curiosite le contenu de la section"
+            width={1174}
+            height={539}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="relative z-10 h-auto w-full object-contain"
+          />
+          <span className="animate-drift absolute right-0 top-[18%] h-10 w-10 rotate-[-18deg] rounded-[45%_55%_45%_55%] border border-primary/30 bg-primary/10 text-primary/50" />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.7 }}
+          className="relative -mt-4 border-t-2 border-primary/35 px-2 pt-12 text-center sm:-mt-6 sm:px-12 sm:pt-16"
+        >
+          <p className="flex items-center justify-center gap-3 text-sm font-semibold uppercase text-accent">
+            <span className="h-px w-10 bg-accent" />
+            Faisons connaissance
+          </p>
+
+          <h2 id="about-title" className="mt-4 text-4xl leading-tight text-primary sm:text-5xl">
+            A propos de moi
+          </h2>
+
+          <p className="mx-auto mt-6 max-w-2xl leading-8 text-muted-foreground">
+            Je m'appelle Hiba, j'ai 22 ans et je suis une developpeuse multimedia tunisienne, future
+            ingenieure en Data & Intelligence Artificielle. J'aime relier le code, le design et les
+            idees pour imaginer des experiences numeriques vivantes et utiles.
+          </p>
+          <p className="mx-auto mt-4 max-w-2xl leading-8 text-muted-foreground">
+            Toujours en train d'apprendre, j'aborde chaque projet avec curiosite, sensibilite et
+            l'envie de creer quelque chose qui a du sens.
+          </p>
+
+          <Button variant="gardenOutline" size="lg" asChild className="mt-8">
+            <Link to="/experience">
+              Decouvrir mon parcours <ArrowRight />
+            </Link>
+          </Button>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 function Home() {
   return (
     <PageLayout>
@@ -166,10 +230,7 @@ function Home() {
         </section>
 
         <TechnologyCarousel />
-        <ProjectsContent as="section" />
-        <ExperienceContent as="section" />
-        <SkillsContent as="section" />
-        <ContactContent as="section" />
+        <AboutContent />
       </main>
     </PageLayout>
   );

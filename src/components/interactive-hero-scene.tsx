@@ -1,7 +1,7 @@
 import type { MouseEvent } from "react";
 import { BrainCircuit, Braces, Code2, Database, Sparkles } from "lucide-react";
 import { motion, useMotionValue, useSpring } from "motion/react";
-import homeHeroVideo from "@/assets/anim-laptop-floor-transparent.webm";
+import homeHeroVideo from "@/assets/anim-crosslegged-transparent.webm";
 
 const techMarks = [
   { label: "Python", short: "Py", icon: Code2, position: "left-[2%] top-[16%]" },

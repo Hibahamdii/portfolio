@@ -5,7 +5,7 @@ import { PageLayout } from "@/components/page-layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import contactImage from "@/assets/hiba-contact-pose.png";
+import contactImage from "@/assets/woman-typing-outfit-transparent.png";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -33,20 +33,17 @@ export function ContactContent({ as: Wrapper = "main" }: { as?: ContentWrapper }
   const [sent, setSent] = useState(false);
 
   return (
-      <Wrapper className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-[0.75fr_1.25fr] lg:px-10">
+      <Wrapper className="mx-auto grid max-w-7xl gap-10 px-5 py-10 lg:grid-cols-[0.75fr_1.25fr] lg:px-10 lg:py-12">
         <section className="self-center">
-          <p className="text-sm font-semibold uppercase text-accent">Un projet en tete ?</p>
-          <h1 className="mt-3 text-5xl text-primary sm:text-6xl">
-            Faisons croitre
-            <br />
-            une innovation.
-          </h1>
-          <p className="mt-6 max-w-md font-editorial text-2xl text-muted-foreground">
+          <p className="text-xs font-semibold uppercase tracking-[0.34em] text-accent sm:text-sm">
+            Contact / Collaboration
+          </p>
+          <p className="mt-3 max-w-md text-sm leading-6 text-muted-foreground">
             Developpeuse IoT & IA passionnee par les projets qui allient technologie, innovation et
             impact. Disponible pour stages, collaborations et defis techniques.
           </p>
 
-          <div className="mt-8 space-y-4 text-sm text-primary">
+          <div className="mt-7 space-y-4 text-sm text-primary">
             <p className="flex items-center gap-3">
               <Mail className="text-accent" />
               hiba.hamdi@atis.tn

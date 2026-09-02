@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { BrainCircuit, BriefcaseBusiness, CodeXml, FileText } from "lucide-react";
 import { PageLayout } from "@/components/page-layout";
-import experienceVideo from "@/assets/anim-whiteboard-transparent.webm";
+import experienceVideo from "@/assets/anim-whiteboard-v2-transparent.webm";
 
 export const Route = createFileRoute("/experience")({
   head: () => ({
@@ -58,23 +58,22 @@ type ContentWrapper = "main" | "section";
 
 export function ExperienceContent({ as: Wrapper = "main" }: { as?: ContentWrapper } = {}) {
   return (
-      <Wrapper className="mx-auto max-w-7xl px-5 py-14 lg:px-10 lg:py-18">
+      <Wrapper className="mx-auto max-w-7xl px-5 py-10 lg:px-10 lg:py-12">
         <header className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <motion.section
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65 }}
           >
-            <p className="text-sm font-semibold uppercase text-accent">Mon parcours pratique</p>
-            <h1 className="mt-3 max-w-3xl text-5xl font-bold leading-[1.05] text-primary sm:text-6xl">
-              Une progression entre creation, technique et experimentation.
-            </h1>
-            <p className="mt-6 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
+            <p className="text-xs font-semibold uppercase tracking-[0.34em] text-accent sm:text-sm">
+              Experience / Parcours
+            </p>
+            <p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground">
               Chaque experience m'aide a transformer une idee en interface, un besoin en prototype,
               et une curiosite technique en projet concret.
             </p>
 
-            <div className="mt-8 grid max-w-2xl grid-cols-2 gap-px overflow-hidden border border-primary/20 bg-primary/20 sm:grid-cols-4">
+            <div className="mt-7 grid max-w-2xl grid-cols-2 gap-px overflow-hidden border border-primary/20 bg-primary/20 sm:grid-cols-4">
               {highlights.map((item) => (
                 <span
                   key={item}
@@ -103,7 +102,7 @@ export function ExperienceContent({ as: Wrapper = "main" }: { as?: ContentWrappe
           </motion.div>
         </header>
 
-        <section className="mt-14">
+        <section className="mt-10">
           <div className="relative mx-auto max-w-5xl space-y-6 pb-16">
             {steps.map((step, index) => {
               const Icon = step.icon;

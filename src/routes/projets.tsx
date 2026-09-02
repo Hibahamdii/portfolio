@@ -90,15 +90,12 @@ export function ProjectsContent({ as: Wrapper = "main" }: { as?: ContentWrapper 
     }
   };
   return (
-      <Wrapper className="mx-auto max-w-7xl px-5 py-16 lg:px-10">
-        <header className="mb-12 max-w-3xl">
-          <p className="mb-3 text-sm font-semibold uppercase text-accent">
-            Mon laboratoire creatif
+      <Wrapper className="mx-auto max-w-7xl px-5 py-10 lg:px-10 lg:py-12">
+        <header className="mb-8 max-w-3xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.34em] text-accent sm:text-sm">
+            Projets / Portfolio
           </p>
-          <h1 className="text-5xl text-primary sm:text-6xl">
-            Des idees qui prennent racine.
-          </h1>
-          <p className="mt-5 font-editorial text-2xl text-muted-foreground">
+          <p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground">
             IoT, intelligence artificielle et developpement web - toujours avec une histoire
             a raconter.
           </p>

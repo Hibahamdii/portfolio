@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BrainCircuit, CodeXml, Database, Palette, Zap } from "lucide-react";
+import { useMemo, useState } from "react";
 import {
   SiAngular,
   SiBlender,
@@ -97,64 +98,92 @@ const groups = [
 type ContentWrapper = "main" | "section";
 
 export function SkillsContent({ as: Wrapper = "main" }: { as?: ContentWrapper } = {}) {
+  const [activeGroup, setActiveGroup] = useState(groups[0].title);
+  const selectedGroup = useMemo(
+    () => groups.find((group) => group.title === activeGroup) ?? groups[0],
+    [activeGroup],
+  );
+
   return (
-      <Wrapper className="mx-auto max-w-7xl px-5 py-12 lg:px-10 lg:py-14">
-        <header className="mb-8 grid items-center gap-6 lg:grid-cols-[minmax(0,1fr)_14rem]">
-          <div>
-            <p className="text-sm font-semibold uppercase text-accent">Ma boite a outils</p>
-            <h1 className="mt-3 text-4xl text-primary sm:text-5xl">
-              Web, mobile, IoT
-              <br />
-              et intelligence artificielle.
-            </h1>
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground">
-              Expertise en developpement multiplateforme, programmation IoT avec LoRaWAN, et machine
-              learning pour des solutions numeriques innovantes.
-            </p>
+    <Wrapper className="mx-auto max-w-7xl px-5 py-10 lg:px-10 lg:py-12">
+      <section className="relative overflow-hidden border border-primary/15 bg-background/90 px-4 py-8 shadow-[8px_8px_0_color-mix(in_oklab,var(--primary)_10%,transparent)] sm:px-7 lg:px-10">
+        <div className="neural-grid pointer-events-none absolute inset-0 opacity-20" aria-hidden="true" />
+
+        <div className="relative">
+          <header className="mx-auto grid max-w-5xl items-center gap-6 md:grid-cols-[minmax(0,1fr)_10rem] lg:grid-cols-[minmax(0,1fr)_12rem]">
+            <div className="text-center md:text-left">
+              <p className="text-xs font-semibold uppercase tracking-[0.34em] text-accent sm:text-sm">
+                Expertise / Techstack
+              </p>
+              <p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground md:mx-0">
+                Developpement web, mobile, IoT et intelligence artificielle pour des solutions
+                numeriques propres et bien structurees.
+              </p>
+            </div>
+
+            <div className="mx-auto grid size-36 place-items-center overflow-hidden md:size-40 lg:size-44">
+              <video
+                aria-label="Animation des competences de Hiba"
+                width={1024}
+                height={1024}
+                className="h-full w-full object-contain p-2"
+                src={skillsVideo}
+                autoPlay
+                muted
+                loop
+              />
+            </div>
+          </header>
+
+          <div
+            aria-label="Categories de competences"
+            className="mx-auto mt-7 flex max-w-4xl flex-wrap items-center justify-center gap-2.5"
+            role="tablist"
+          >
+            {groups.map(({ icon: Icon, title }) => {
+              const isActive = title === activeGroup;
+
+              return (
+                <button
+                  key={title}
+                  aria-selected={isActive}
+                  className={`inline-flex h-9 min-w-0 items-center justify-center gap-2 rounded-full border px-4 text-[0.7rem] font-semibold transition duration-300 sm:min-w-32 ${
+                    isActive
+                      ? "border-accent bg-accent text-accent-foreground shadow-[0_10px_24px_color-mix(in_oklab,var(--accent)_22%,transparent)]"
+                      : "border-primary/15 bg-paper text-foreground hover:border-accent/50 hover:text-primary"
+                  }`}
+                  onClick={() => setActiveGroup(title)}
+                  role="tab"
+                  type="button"
+                >
+                  <Icon className="size-4" />
+                  {title}
+                </button>
+              );
+            })}
           </div>
 
-          <video
-            aria-label="Animation des compétences de Hiba"
-            width={1024}
-            height={1024}
-            className="mx-auto hidden w-full max-w-56 object-contain sm:block"
-            src={skillsVideo}
-            autoPlay
-            muted
-            loop
-          />
-        </header>
-
-        <div className="grid items-start gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {groups.map(({ icon: Icon, title, items }) => (
-            <section
-              key={title}
-              className="border border-primary/15 bg-background/90 p-5 shadow-[8px_8px_0_color-mix(in_oklab,var(--primary)_10%,transparent)] backdrop-blur-sm transition duration-300 hover:border-accent/50 hover:bg-paper"
-            >
-              <div className="flex items-center gap-3">
-                <span className="grid size-10 shrink-0 place-items-center rounded-md border border-primary/20 bg-paper text-accent">
-                  <Icon className="size-5" />
-                </span>
-                <h2 className="text-2xl text-primary">{title}</h2>
-              </div>
-              <ul className="mt-5 flex flex-wrap gap-2">
-                {items.map(({ name, logo: Logo }) => (
-                  <li
-                    key={name}
-                    className="group inline-flex items-center gap-2 rounded-md border border-primary/15 bg-paper px-3 py-2 transition-colors hover:border-accent hover:bg-background"
-                  >
-                    <Logo
-                      aria-hidden="true"
-                      className="size-4 text-primary transition-colors group-hover:text-accent"
-                    />
-                    <span className="text-xs font-semibold text-foreground">{name}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
+          <div className="mx-auto mt-8 grid max-w-3xl grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-5">
+            {selectedGroup.items.map(({ name, logo: Logo }) => (
+              <article
+                key={name}
+                className="group grid h-24 place-items-center border border-primary/10 bg-paper/90 p-3 text-center shadow-[0_10px_26px_color-mix(in_oklab,var(--primary)_7%,transparent)] transition duration-300 hover:-translate-y-1 hover:border-accent/45 hover:bg-background sm:h-28"
+              >
+                <div>
+                  <Logo
+                    aria-hidden="true"
+                    className="mx-auto size-8 text-primary transition duration-300 group-hover:text-accent sm:size-10"
+                  />
+                  <h2 className="mt-3 text-[0.7rem] font-semibold leading-tight text-foreground sm:text-xs">
+                    {name}
+                  </h2>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
-      </Wrapper>
+      </section>
+    </Wrapper>
   );
 }
 

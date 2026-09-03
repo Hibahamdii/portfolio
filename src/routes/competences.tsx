@@ -6,8 +6,10 @@ import {
   SiCss,
   SiDart,
   SiDocker,
+  SiFastapi,
   SiFigma,
   SiFirebase,
+  SiFlask,
   SiFlutter,
   SiGit,
   SiGithub,
@@ -57,34 +59,36 @@ export const Route = createFileRoute("/competences")({
 });
 
 const skills = [
-  SiHtml5,
-  SiCss,
-  SiJavascript,
-  SiTypescript,
-  SiReact,
-  SiAngular,
-  SiPhp,
-  SiLaravel,
-  SiNodedotjs,
-  SiTailwindcss,
-  SiFlutter,
-  SiDart,
-  SiOpenjdk,
-  SiUnity,
-  SiMysql,
-  SiSupabase,
-  SiFirebase,
-  SiPython,
-  SiTensorflow,
-  SiScikitlearn,
-  SiPandas,
-  SiNumpy,
-  SiJupyter,
-  SiFigma,
-  SiBlender,
-  SiDocker,
-  SiGit,
-  SiGithub,
+  { name: "HTML5", logo: SiHtml5 },
+  { name: "CSS3", logo: SiCss },
+  { name: "JavaScript", logo: SiJavascript },
+  { name: "TypeScript", logo: SiTypescript },
+  { name: "React", logo: SiReact },
+  { name: "Angular", logo: SiAngular },
+  { name: "PHP", logo: SiPhp },
+  { name: "Laravel", logo: SiLaravel },
+  { name: "Node.js", logo: SiNodedotjs },
+  { name: "Tailwind CSS", logo: SiTailwindcss },
+  { name: "Flutter", logo: SiFlutter },
+  { name: "Dart", logo: SiDart },
+  { name: "Java", logo: SiOpenjdk },
+  { name: "Unity", logo: SiUnity },
+  { name: "MySQL", logo: SiMysql },
+  { name: "Supabase", logo: SiSupabase },
+  { name: "Firebase", logo: SiFirebase },
+  { name: "Python", logo: SiPython },
+  { name: "Flask", logo: SiFlask },
+  { name: "FastAPI", logo: SiFastapi },
+  { name: "TensorFlow", logo: SiTensorflow },
+  { name: "Scikit-learn", logo: SiScikitlearn },
+  { name: "Pandas", logo: SiPandas },
+  { name: "NumPy", logo: SiNumpy },
+  { name: "Jupyter", logo: SiJupyter },
+  { name: "Figma", logo: SiFigma },
+  { name: "Blender", logo: SiBlender },
+  { name: "Docker", logo: SiDocker },
+  { name: "Git", logo: SiGit },
+  { name: "GitHub", logo: SiGithub },
 ];
 
 type ContentWrapper = "main" | "section";
@@ -140,11 +144,11 @@ export function SkillsContent({ as: Wrapper = "main" }: { as?: ContentWrapper } 
             </div>
           </header>
 
-          <div className="mx-auto mt-10 grid max-w-6xl grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7">
-            {skills.map((Logo, index) => (
+          <div className="mx-auto mt-10 grid max-w-6xl grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
+            {skills.map(({ name, logo: Logo }, index) => (
               <motion.div
-                key={index}
-                className="group flex aspect-square items-center justify-center border border-primary/10 bg-paper/85 p-3 shadow-[0_8px_20px_color-mix(in_oklab,var(--primary)_6%,transparent)] transition duration-300 hover:-translate-y-1 hover:border-accent/45"
+                key={name}
+                className="group flex aspect-square flex-col items-center justify-center gap-2 border border-primary/10 bg-paper/85 p-2 text-center shadow-[0_8px_20px_color-mix(in_oklab,var(--primary)_6%,transparent)] transition duration-300 hover:-translate-y-1 hover:border-accent/45"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, margin: "-20px" }}
@@ -157,8 +161,11 @@ export function SkillsContent({ as: Wrapper = "main" }: { as?: ContentWrapper } 
               >
                 <Logo
                   aria-hidden="true"
-                  className="size-7 text-primary transition duration-300 group-hover:text-accent sm:size-9"
+                  className="size-6 text-primary transition duration-300 group-hover:text-accent sm:size-8"
                 />
+                <h3 className="text-[0.6rem] font-semibold leading-tight text-foreground sm:text-xs">
+                  {name}
+                </h3>
               </motion.div>
             ))}
           </div>

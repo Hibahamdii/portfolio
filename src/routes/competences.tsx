@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 import {
   SiAngular,
   SiBlender,
@@ -93,6 +94,17 @@ type ContentWrapper = "main" | "section";
 
 export function SkillsContent({ as: Wrapper = "main" }: { as?: ContentWrapper } = {}) {
   const useFallback = useIosTransparentVideoFallback();
+  const titleRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+
+  const { scrollYProgress } = useScroll({
+    target: titleRef,
+    offset: ["start end", "center center", "end start"],
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.7, 1.15, 0.7]);
+  const y = useTransform(scrollYProgress, [0, 0.5, 1], [60, 0, -60]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.3, 1, 1, 0.3]);
 
   return (
     <Wrapper className="mx-auto max-w-7xl px-5 py-10 lg:px-10 lg:py-12">
@@ -105,16 +117,34 @@ export function SkillsContent({ as: Wrapper = "main" }: { as?: ContentWrapper } 
         <div className="neural-grid pointer-events-none absolute inset-0 opacity-20" aria-hidden="true" />
 
         <div className="relative">
-          <header className="mx-auto grid max-w-5xl items-center gap-6 md:grid-cols-[minmax(0,1fr)_10rem] lg:grid-cols-[minmax(0,1fr)_12rem]">
-            <div className="text-center md:text-left">
-              <p className="text-xs font-semibold uppercase tracking-[0.34em] text-accent sm:text-sm">
-                Expertise / Techstack
-              </p>
-              <p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground md:mx-0">
-                Developpement web, mobile, IoT et intelligence artificielle pour des solutions
-                numeriques propres et bien structurees.
-              </p>
-            </div>
+          <header
+            ref={titleRef}
+            className="mx-auto grid max-w-5xl items-center gap-6 md:grid-cols-[minmax(0,1fr)_10rem] lg:grid-cols-[minmax(0,1fr)_12rem]"
+          >
+            {prefersReducedMotion ? (
+              <div className="text-center md:text-left">
+                <p className="text-xs font-semibold uppercase tracking-[0.34em] text-accent sm:text-sm">
+                  Expertise / Techstack
+                </p>
+                <p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground md:mx-0">
+                  Developpement web, mobile, IoT et intelligence artificielle pour des solutions
+                  numeriques propres et bien structurees.
+                </p>
+              </div>
+            ) : (
+              <motion.div
+                className="text-center md:text-left"
+                style={{ scale, y, opacity, transformPerspective: 800 }}
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.34em] text-accent sm:text-sm">
+                  Expertise / Techstack
+                </p>
+                <p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground md:mx-0">
+                  Developpement web, mobile, IoT et intelligence artificielle pour des solutions
+                  numeriques propres et bien structurees.
+                </p>
+              </motion.div>
+            )}
 
             <div className="mx-auto grid size-36 place-items-center overflow-hidden md:size-40 lg:size-44">
               {useFallback ? (
